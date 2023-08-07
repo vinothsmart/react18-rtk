@@ -25,7 +25,7 @@ const Product = () => {
 
   return (
     <>
-      <h1>Product Test Dashboard</h1>
+      <h1>Product Dashboard</h1>
     </>
   );
 };
