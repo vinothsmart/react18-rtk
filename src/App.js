@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 const Product = lazy(() => import("./components/Product"));
 
