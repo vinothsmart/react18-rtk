@@ -24,14 +24,14 @@ const Product = () => {
   if (isLoading) return <h1>Component Level Loading...</h1>;
   if (isError) return <h1>Component Level Error</h1>;
 
-  const cards = products.map(product => (
-    <ProductCard key={product.id} title={product.title} />
-  ));
-
   return (
     <>
       <h1>Product Dashboard</h1>
-      {cards}
+      <div className="row">
+        {products.map(product => (
+          <ProductCard key={product.id} title={product.title} />
+        ))}
+      </div>
     </>
   );
 };
