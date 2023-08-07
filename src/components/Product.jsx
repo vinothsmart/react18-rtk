@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
 
 const Product = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,9 +24,14 @@ const Product = () => {
   if (isLoading) return <h1>Loading...</h1>;
   if (isError) return <h1>Error</h1>;
 
+  const cards = products.map(product => (
+    <ProductCard key={product.id} title={product.title} />
+  ));
+
   return (
     <>
       <h1>Product Dashboard</h1>
+      {cards}
     </>
   );
 };
