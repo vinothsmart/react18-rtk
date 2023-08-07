@@ -6,7 +6,7 @@ const Product = lazy(() => import("./components/Product"));
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<h1>Product Loading...</h1>}>
+      <Suspense fallback={<h1>App Level Loading...</h1>}>
         <Product />
       </Suspense>
     </div>

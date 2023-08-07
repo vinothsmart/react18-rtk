@@ -21,8 +21,8 @@ const Product = () => {
     fetchProducts();
   }, [fetchProducts]);
 
-  if (isLoading) return <h1>Loading...</h1>;
-  if (isError) return <h1>Error</h1>;
+  if (isLoading) return <h1>Component Level Loading...</h1>;
+  if (isError) return <h1>Component Level Error</h1>;
 
   const cards = products.map(product => (
     <ProductCard key={product.id} title={product.title} />
