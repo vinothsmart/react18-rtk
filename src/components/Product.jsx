@@ -29,7 +29,12 @@ const Product = () => {
       <h1>Product Dashboard</h1>
       <div className="row">
         {products.map(product => (
-          <ProductCard key={product.id} title={product.title} />
+          <ProductCard
+            key={product.id}
+            title={product.title}
+            image={product.image}
+            price={product.price}
+          />
         ))}
       </div>
     </>
