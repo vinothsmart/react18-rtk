@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Card } from "react-bootstrap";
 import { useCallback } from "react";
-import { deleteProduct } from "../store/cartSlice";
+import { remove } from "../store/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const productCart = useSelector(state => state.cart);
   const removeProduct = useCallback(
     id => () => {
-      dispatch(deleteProduct(id));
+      dispatch(remove(id));
     },
     [dispatch],
   );
@@ -29,7 +29,7 @@ const Cart = () => {
               <Card.Text>INR - {product.price}</Card.Text>
             </Card.Body>
             <Card.Footer style={{ background: "white" }}>
-              <Button variant="primary" onClick={removeProduct(product.id)}>
+              <Button variant="danger" onClick={removeProduct(product.id)}>
                 Remove Item
               </Button>
             </Card.Footer>
