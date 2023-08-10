@@ -1,21 +1,34 @@
 import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../store/productSlice";
 import ProductCard from "./ProductCard";
 
 const Product = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+
+  const { data: products } = useSelector(state => state.products);
+
+  // const fetchProducts = useCallback(async () => {
+  //   try {
+  //     const response = await fetch("https://fakestoreapi.com/products");
+  //     const data = await response.json();
+  //     setProducts(data);
+  //     setIsLoading(false);
+  //   } catch (_e) {
+  //     setIsError(true);
+  //   }
+  // }, []);
 
   const fetchProducts = useCallback(async () => {
     try {
-      const response = await fetch("https://fakestoreapi.com/products");
-      const data = await response.json();
-      setProducts(data);
+      dispatch(getProducts());
       setIsLoading(false);
     } catch (_e) {
       setIsError(true);
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     fetchProducts();
