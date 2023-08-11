@@ -2,6 +2,7 @@ import { useCallback, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../store/productSlice";
+import StatusCode from "../utils/StatusCode";
 import ProductCard from "./ProductCard";
 
 const Product = () => {
@@ -16,8 +17,8 @@ const Product = () => {
     fetchProducts();
   }, [fetchProducts]);
 
-  if (status === "loading") return <h1>Component Level Loading...</h1>;
-  if (status === "failed")
+  if (status === StatusCode.LOADING) return <h1>Component Level Loading...</h1>;
+  if (status === StatusCode.ERROR)
     return (
       <Alert variant="danger">
         <Alert.Heading>Oh snap! You got an error!</Alert.Heading>

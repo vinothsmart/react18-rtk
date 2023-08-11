@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import StatusCode from "../utils/StatusCode";
 
 const initialState = {
   data: [],
-  status: "idle",
+  status: StatusCode.IDEL,
 };
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async () => {
-    const data = await fetch("https://fakestoreapi.com/productssss");
+    const data = await fetch("https://fakestoreapi.com/products");
     const result = await data.json();
     return result;
   },
@@ -21,14 +22,14 @@ const productSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getProducts.pending, state => {
-        state.status = "loading";
+        state.status = StatusCode.LOADING;
       })
       .addCase(getProducts.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = StatusCode.IDEL;
         state.data = action.payload;
       })
       .addCase(getProducts.rejected, state => {
-        state.status = "failed";
+        state.status = StatusCode.ERROR;
       });
   },
 });
