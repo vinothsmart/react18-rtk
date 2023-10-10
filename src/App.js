@@ -7,6 +7,7 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import { Testing } from "./components/Testing";
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Cart = lazy(() => import("./components/Cart"));
 const RootLayout = lazy(() => import("./components/RootLayout"));
@@ -34,6 +35,13 @@ function App() {
           element={
             <Suspense fallback={<h1>App Level Loading...</h1>}>
               <Cart />
+            </Suspense>
+          }></Route>
+        <Route
+          path="/testing"
+          element={
+            <Suspense fallback={<h1>App Level Loading...</h1>}>
+              <Testing />
             </Suspense>
           }></Route>
         <Route
