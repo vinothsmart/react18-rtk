@@ -13,6 +13,7 @@ const Cart = lazy(() => import("./components/Cart"));
 const RootLayout = lazy(() => import("./components/RootLayout"));
 const NoMatch = lazy(() => import("./components/NoMatch"));
 
+// updated
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
