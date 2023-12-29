@@ -1,13 +1,8 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  useLayoutEffect,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const usersDataURL = "https://jsonplaceholder.typicode.com/users";
 
-export const Testing = ({ driverOrders, selectedStoresState }) => {
+export const Testing = () => {
   const [list, setList] = useState([]);
 
   const fetchUsers = useCallback(async () => {
