@@ -21,8 +21,10 @@ export const Testing = () => {
       {list.map(({ id, name }) => (
         <div key={id}>
           <div className="row">
-            <div className="col-lg-4">
-              <p>{name}</p>
+            <div className="col-lg-12">
+              <div className="text-center">
+                <p>{name}</p>
+              </div>
             </div>
           </div>
         </div>
