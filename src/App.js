@@ -19,7 +19,7 @@ function App() {
       <Route
         path="/"
         element={
-          <Suspense fallback={<h1>App Level Loading...</h1>}>
+          <Suspense fallback={<h1>Root Layout Loading...</h1>}>
             <RootLayout />
           </Suspense>
         }>
