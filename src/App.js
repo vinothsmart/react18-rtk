@@ -7,13 +7,12 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-
+import { Testing } from "./components/Testing";
+import Practice from "./components/Practice";
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Cart = lazy(() => import("./components/Cart"));
 const RootLayout = lazy(() => import("./components/RootLayout"));
 const NoMatch = lazy(() => import("./components/NoMatch"));
-const Testing = lazy(() => import("./components/Testing"));
-const Practice = lazy(() => import("./components/Practice"));
 
 function App() {
   const router = createBrowserRouter(
