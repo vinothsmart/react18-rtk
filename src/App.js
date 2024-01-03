@@ -7,11 +7,13 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-import { Testing } from "./components/Testing";
+
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Cart = lazy(() => import("./components/Cart"));
 const RootLayout = lazy(() => import("./components/RootLayout"));
 const NoMatch = lazy(() => import("./components/NoMatch"));
+const Testing = lazy(() => import("./components/Testing"));
+const Practice = lazy(() => import("./components/Practice"));
 
 function App() {
   const router = createBrowserRouter(
@@ -42,6 +44,13 @@ function App() {
           element={
             <Suspense fallback={<h1>App Level Loading...</h1>}>
               <Testing />
+            </Suspense>
+          }></Route>
+        <Route
+          path="/pratice"
+          element={
+            <Suspense fallback={<h1>App Level Loading...</h1>}>
+              <Practice />
             </Suspense>
           }></Route>
         <Route

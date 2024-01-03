@@ -7,7 +7,7 @@ const RootLayout = () => {
   return (
     <>
       <Provider store={store}>
-        <NavBar />
+        {/* <NavBar /> */}
         <main>
           <Outlet />
         </main>
