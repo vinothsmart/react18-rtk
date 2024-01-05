@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { Testing } from "./components/Testing";
 import Practice from "./components/Practice";
+import UsBank from "./components/UsBank";
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Cart = lazy(() => import("./components/Cart"));
 const RootLayout = lazy(() => import("./components/RootLayout"));
@@ -50,6 +51,13 @@ function App() {
           element={
             <Suspense fallback={<h1>App Level Loading...</h1>}>
               <Practice />
+            </Suspense>
+          }></Route>
+        <Route
+          path="/usbank"
+          element={
+            <Suspense fallback={<h1>App Level Loading...</h1>}>
+              <UsBank />
             </Suspense>
           }></Route>
         <Route
