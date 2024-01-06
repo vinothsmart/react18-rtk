@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { Testing } from "./components/Testing";
 import Practice from "./components/Practice";
-import UsBank from "./components/UsBank";
+import EmailPage from "./components/EmailPage";
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Cart = lazy(() => import("./components/Cart"));
 const RootLayout = lazy(() => import("./components/RootLayout"));
@@ -57,7 +57,7 @@ function App() {
           path="/usbank"
           element={
             <Suspense fallback={<h1>App Level Loading...</h1>}>
-              <UsBank />
+              <EmailPage />
             </Suspense>
           }></Route>
         <Route

@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from "react";
 import EmailFrom from "./EmailFrom";
 
-export const UsBank = () => {
+export const EmailPage = () => {
   const [values, setValues] = useState({ name: "", email: "" });
   const [showText, setShowText] = useState(false);
   const [usersList, setUsersList] = useState([]);
@@ -39,4 +39,4 @@ export const UsBank = () => {
   );
 };
 
-export default memo(UsBank);
+export default memo(EmailPage);
