@@ -10,6 +10,7 @@ import {
 import { Testing } from "./components/Testing";
 import Practice from "./components/Practice";
 import EmailPage from "./components/EmailPage";
+import ThemeParent from "./components/ThemeParent";
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Cart = lazy(() => import("./components/Cart"));
 const RootLayout = lazy(() => import("./components/RootLayout"));
@@ -51,6 +52,13 @@ function App() {
           element={
             <Suspense fallback={<h1>App Level Loading...</h1>}>
               <Practice />
+            </Suspense>
+          }></Route>
+        <Route
+          path="/theme"
+          element={
+            <Suspense fallback={<h1>App Level Loading...</h1>}>
+              <ThemeParent />
             </Suspense>
           }></Route>
         <Route
