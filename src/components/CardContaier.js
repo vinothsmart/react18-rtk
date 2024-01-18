@@ -1,8 +1,15 @@
+import { useCallback } from "react";
 import CardItem from "./CardItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../features/cartSlice";
 
 const CardContaier = () => {
+  const dispatch = useDispatch();
   const { cartItems, total, amount } = useSelector((store) => store.cart);
+
+  const clearCartItems = useCallback(() => {
+    dispatch(clearCart());
+  }, [dispatch]);
 
   if (amount < 1) {
     return (
@@ -31,7 +38,9 @@ const CardContaier = () => {
             total <span>Rs{total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn">clear cart</button>
+        <button className="btn clear-btn" onClick={clearCartItems}>
+          clear cart
+        </button>
       </footer>
     </section>
   );
