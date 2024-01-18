@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import ThemeChildren from "./ThemeChildren";
+import ThemeInnerChild from "./ThemeInnerChild";
 
 export const ThemeContext = createContext(null);
 
@@ -17,7 +18,9 @@ const ThemeParent = () => {
 
   return (
     <ThemeContext.Provider value={{ themeColor, handleButton }}>
-      <ThemeChildren />
+      <ThemeChildren>
+        <ThemeInnerChild />
+      </ThemeChildren>
     </ThemeContext.Provider>
   );
 };
