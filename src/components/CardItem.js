@@ -1,13 +1,29 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ChevronDown, ChevronUp } from "../icons";
-import { removeItem } from "../features/cartSlice";
+import { decrease, increase, removeItem } from "../features/cartSlice";
 
 const CardItem = ({ id, img, title, price, amount }) => {
   const dispatch = useDispatch();
+
   const handleRemoveItem = useCallback(
     (id) => () => {
       dispatch(removeItem({ id }));
+    },
+    [dispatch]
+  );
+
+  const handleIncrease = useCallback(
+    (id) => () => {
+      dispatch(increase({ id }));
+      console.log("increase");
+    },
+    [dispatch]
+  );
+
+  const handleDecrease = useCallback(
+    (id) => () => {
+      dispatch(decrease({ id }));
     },
     [dispatch]
   );
@@ -24,11 +40,11 @@ const CardItem = ({ id, img, title, price, amount }) => {
       </div>
 
       <div>
-        <button className="amount-btn">
+        <button className="amount-btn" onClick={handleIncrease(id)}>
           <ChevronUp />
         </button>
         <p className="amount">{amount}</p>
-        <button className="amount-btn">
+        <button className="amount-btn" onClick={handleDecrease(id)}>
           <ChevronDown />
         </button>
       </div>
