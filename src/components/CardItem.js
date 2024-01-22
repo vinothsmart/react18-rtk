@@ -16,13 +16,16 @@ const CardItem = ({ id, img, title, price, amount }) => {
   const handleIncrease = useCallback(
     (id) => () => {
       dispatch(increase({ id }));
-      console.log("increase");
     },
     [dispatch]
   );
 
   const handleDecrease = useCallback(
-    (id) => () => {
+    (id, amount) => () => {
+      if (amount === 1) {
+        dispatch(removeItem({ id }));
+        return;
+      }
       dispatch(decrease({ id }));
     },
     [dispatch]
@@ -44,7 +47,7 @@ const CardItem = ({ id, img, title, price, amount }) => {
           <ChevronUp />
         </button>
         <p className="amount">{amount}</p>
-        <button className="amount-btn" onClick={handleDecrease(id)}>
+        <button className="amount-btn" onClick={handleDecrease(id, amount)}>
           <ChevronDown />
         </button>
       </div>
