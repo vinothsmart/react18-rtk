@@ -1,14 +1,14 @@
 import { useCallback } from "react";
-import CardItem from "./CardItem";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart } from "../features/cart/cartSlice";
+import CardItem from "./CardItem";
+import { openModal } from "../features/modal/modalSlice";
 
 const CardContaier = () => {
   const dispatch = useDispatch();
   const { cartItems, total, amount } = useSelector((store) => store.cart);
 
-  const clearCartItems = useCallback(() => {
-    dispatch(clearCart());
+  const handleOpen = useCallback(() => {
+    dispatch(openModal());
   }, [dispatch]);
 
   if (amount < 1) {
@@ -38,7 +38,7 @@ const CardContaier = () => {
             total <span>Rs{total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn" onClick={clearCartItems}>
+        <button className="btn clear-btn" onClick={handleOpen}>
           clear cart
         </button>
       </footer>
