@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardContaier from "./components/CardContaier";
 import Navbar from "./components/Navbar";
-import { calculateTotals } from "./features/cartSlice";
+import { calculateTotals } from "./features/cart/cartSlice";
 import Modal from "./components/Modal";
 
 function App() {

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import CardItem from "./CardItem";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart } from "../features/cartSlice";
+import { clearCart } from "../features/cart/cartSlice";
 
 const CardContaier = () => {
   const dispatch = useDispatch();

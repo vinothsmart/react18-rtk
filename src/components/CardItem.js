@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ChevronDown, ChevronUp } from "../icons";
-import { decrease, increase, removeItem } from "../features/cartSlice";
+import { decrease, increase, removeItem } from "../features/cart/cartSlice";
 
 const CardItem = ({ id, img, title, price, amount }) => {
   const dispatch = useDispatch();
