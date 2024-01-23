@@ -31,11 +31,34 @@ const cartSlice = createSlice({
       );
       cartItem.amount--;
     },
+    calculateTotals: (state) => {
+      let { total, amount } = state.cartItems.reduce(
+        (cartTotal, cartItem) => {
+          const { price, amount } = cartItem;
+          const itemTotal = price * amount;
+
+          cartTotal.total += itemTotal;
+          cartTotal.amount += amount;
+
+          return cartTotal;
+        },
+        {
+          total: 0,
+          amount: 0,
+        }
+      );
+
+      total = parseFloat(total.toFixed(2));
+
+      state.total = total;
+      state.amount = amount;
+    },
   },
 });
 
 // console.log(cartSlice);
 
-export const { clearCart, removeItem, increase, decrease } = cartSlice.actions;
+export const { clearCart, removeItem, increase, decrease, calculateTotals } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
