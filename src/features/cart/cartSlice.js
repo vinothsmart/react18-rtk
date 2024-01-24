@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import cartItems from "../../cartItems";
 
 const initialState = {
-  cartItems: cartItems,
   cartItems: [],
   amount: 4,
   total: 0,
@@ -66,17 +64,17 @@ const cartSlice = createSlice({
       state.total = total;
       state.amount = amount;
     },
-    extraReducers: {
-      [getCartItems.pending]: (state) => {
-        state.isLoading = true;
-      },
-      [getCartItems.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        state.cartItems = action.payload;
-      },
-      [getCartItems.rejected]: (state) => {
-        state.isLoading = false;
-      },
+  },
+  extraReducers: {
+    [getCartItems.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getCartItems.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.cartItems = action.payload;
+    },
+    [getCartItems.rejected]: (state) => {
+      state.isLoading = false;
     },
   },
 });
