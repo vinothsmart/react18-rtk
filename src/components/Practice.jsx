@@ -3,6 +3,8 @@ import React, { useCallback, useState } from "react";
 const Practice = () => {
   const [email, setName] = useState("");
   const [emailList, setEmailList] = useState([]);
+  const [selectedEmail, setSelectedEmail] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const handleChange = useCallback(e => {
     setName(e.target.value);
@@ -20,23 +22,34 @@ const Practice = () => {
     [emailList],
   );
 
-  const handleUpdateEmail = useCallback(
+  const viewEmail = useCallback(
     email => () => {
       setName(email);
+      setSelectedEmail(email);
+      setIsUpdate(true);
     },
     [],
   );
 
+  const handleUpdate = useCallback(() => {
+    setEmailList(preV =>
+      preV.map(item => (item === selectedEmail ? email : item)),
+    );
+    setIsUpdate(false);
+  }, [email, selectedEmail]);
+
   return (
     <div>
       <input text="input" name="email" onChange={handleChange} value={email} />
-      <button onClick={handleSumbit}>Add It </button>
+      <button onClick={isUpdate ? handleUpdate : handleSumbit}>
+        {isUpdate ? "Update it" : "Add It"}
+      </button>
       <div>
         {emailList.map(item => {
           return (
             <div key={item}>
               <h1 onClick={handleDelete(item)}>{item}</h1>
-              <button onClick={handleUpdateEmail(email)}>edit</button>
+              <button onClick={viewEmail(item)}>edit</button>
             </div>
           );
         })}
