@@ -60,12 +60,11 @@ const Practice = () => {
   // another way to solve the problem
   const flatten = (data, reportsTo = null) => {
     return data.reduce((acc, { name, poistion, directReports }) => {
-      const reports = [
-        { name, poistion, reportsTo },
+      return [
+        ...acc,
+        { name, poistion, ...(reportsTo && { reportsTo }) },
         ...flatten(directReports, name),
       ];
-
-      return [...acc, ...reports];
     }, []);
   };
 
