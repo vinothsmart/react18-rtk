@@ -1,76 +1,35 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const Practice = () => {
-  const data = [
-    {
-      name: "Mark",
-      poistion: "CEO",
-      directReports: [
-        {
-          name: "Steve",
-          poistion: "Vp",
-          directReports: [
-            {
-              name: "Terry",
-              poistion: "Sales",
-              directReports: [
-                {
-                  name: "April",
-                  poistion: "Associate Sales",
-                  directReports: [],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          name: "July",
-          poistion: "Marketing",
-          directReports: [],
-        },
-      ],
+  const [users, setUsers] = useState([]);
+
+  const fetchUsers = useCallback(async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    setUsers(data);
+  }, []);
+
+  const handleDelete = useCallback(
+    id => () => {
+      const filter = users.filter(user => user.id !== id);
+      setUsers(filter);
     },
-    {
-      name: "Augues",
-      poistion: "Engineering",
-      directReports: [],
-    },
-  ];
+    [users],
+  );
 
-  // expected output
-  // [
-  //   { name: "April", poistion: "Associate Sales", reportsTo: "Sales" },
-  //   { name: "Terry", poistion: "Sales", reportsTo: "Vp" },
-  //   { name: "Steve", poistion: "Vp", reportsTo: "CEO" },
-  //   { name: "July", poistion: "Marketing", reportsTo: "CEO" },
-  //   { name: "Mark", poistion: "CEO" },
-  //   { name: "Augues", poistion: "Engineering" },
-  // ];
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
-  // const flatten = (data, reportsTo = null) => {
-  //   return data.reduce((acc, { name, poistion, directReports }) => {
-  //     return [
-  //       ...acc,
-  //       { name, poistion, reportsTo },
-  //       ...flatten(directReports, name),
-  //     ];
-  //   }, []);
-  // };
-
-  // another way to solve the problem
-  const flatten = (data, reportsTo = null) => {
-    return data.reduce((acc, { name, poistion, directReports }) => {
-      return [
-        ...acc,
-        { name, poistion, ...(reportsTo && { reportsTo }) },
-        ...flatten(directReports, name),
-      ];
-    }, []);
-  };
-
-  console.log(flatten(data));
-
-  return <h1>Testing</h1>;
+  return (
+    <>
+      {users.map(({ id, name }) => (
+        <h1 key={id} onClick={handleDelete(id)}>
+          {name}
+        </h1>
+      ))}
+    </>
+  );
 };
 
 export default Practice;
