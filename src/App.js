@@ -51,7 +51,7 @@ function App() {
           path="/pratice"
           element={
             <Suspense fallback={<h1>App Level Loading...</h1>}>
-              <Practice />
+              <Practice timeoutDealy="5000" />
             </Suspense>
           }></Route>
         <Route
