@@ -7,9 +7,8 @@ const initialState = {
   status: "IDEL",
 };
 
-export const getUsers = createAsyncThunk("products/users", async () => {
+export const getUsers = createAsyncThunk("users/getUsers", async () => {
   const data = await fetch(USER_URL);
-  console.log("vinothcreateAsyncThunk", data);
   const result = await data.json();
   return result;
 });
