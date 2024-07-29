@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const USER_URL = "https://jsonplaceholder.typicode.com/users";
 
-const intialState = {
+const initialState = {
   data: [],
   status: "IDEL",
 };
@@ -16,7 +16,7 @@ export const getUsers = createAsyncThunk("products/users", async () => {
 
 const userSlice = createSlice({
   name: "users",
-  intialState,
+  initialState,
   reducers: {},
   extraReducers: builder => {
     builder
@@ -33,5 +33,4 @@ const userSlice = createSlice({
   },
 });
 
-export const { fethUsers } = userSlice.actions;
 export default userSlice.reducer;
