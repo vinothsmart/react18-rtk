@@ -1,31 +1,82 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+
+const taskTodos = [
+  {
+    id: 1,
+    name: "Task 1",
+    checked: false,
+  },
+  {
+    id: 2,
+    name: "Task 2",
+    checked: true,
+  },
+  {
+    id: 3,
+    name: "Task 3",
+    checked: true,
+  },
+];
 
 const Practice = () => {
-  const numbers = [1, 2, 2, 3, 3, 3, 4];
+  const [todos, setTodos] = useState([]);
+  const [todoName, setTodoName] = useState("");
 
-  const [searchValue, setSearchValue] = useState("");
-  const [filteredValues, setFilteredValues] = useState([]);
-
-  const handleChange = useCallback(e => {
-    setSearchValue(e.target.value);
+  useEffect(() => {
+    setTodos(taskTodos);
   }, []);
 
-  const handleSumbmit = useCallback(
+  const handleChange = useCallback(
+    id => () => {
+      const filterData = todos.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, checked: !todo.checked };
+        }
+        return todo;
+      });
+
+      setTodos(filterData);
+    },
+    [todos],
+  );
+
+  const handleTodoText = useCallback(e => {
+    const { value } = e.target;
+    setTodoName(value);
+  }, []);
+
+  const handleAddTodo = useCallback(
     e => {
       e.preventDefault();
-      const filterData = numbers.filter(item => item === +searchValue);
-      setFilteredValues(filterData);
+      setTodos(prev => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          name: todoName,
+          checked: true,
+        },
+      ]);
     },
-    [searchValue],
+    [todoName],
   );
   return (
     <>
       <h1>Testing Page</h1>
-      <input type="text" onChange={handleChange} name="searchNumber" />
-      <button onClick={handleSumbmit}>Filter Number</button>
-      <h1>
-        Value searched {searchValue} : {filteredValues.length}
-      </h1>
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.checked}
+              onChange={handleChange(todo.id)}
+            />
+            {todo.name}
+          </li>
+        ))}
+      </ul>
+      <label>Name:</label>
+      <input type="text" onChange={handleTodoText} value={todoName} />
+      <button onClick={handleAddTodo}>Add Todo</button>
     </>
   );
 };
