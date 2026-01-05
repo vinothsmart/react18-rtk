@@ -9,7 +9,7 @@ export const Testing = () => {
     return duplicateArray.indexOf(item) === index;
   });
 
-  console.log(uniqueArray);
+  // console.log(uniqueArray);
 
   const months = ["May", "Feb", "Feb", "Jan", "March", "April", "May"];
 
