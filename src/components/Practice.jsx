@@ -1,40 +1,62 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 
-const UsersURL = "https://jsonplaceholder.typicode.com/users";
+const data = [
+  { id: 1, city: "Chennai" },
+  { id: 2, city: "Bangalore" },
+  { id: 3, city: "Hyderabad" },
+  { id: 4, city: "Pune" },
+  { id: 5, city: "Mumbai" },
+];
 
 const Practice = () => {
-  const [users, setUsers] = useState([]);
-
-  const fetchUsers = useCallback(async () => {
-    try {
-      const data = await fetch(UsersURL);
-      const result = await data.json();
-      setUsers(result);
-    } catch (e) {
-      console.log("Error failed API", e);
-    }
+  const [cityList, setCityList] = useState(data);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [newCity, setNewCity] = useState("");
+  const handleCity = useCallback(e => {
+    const { value } = e.target;
+    setNewCity(value);
   }, []);
 
-  const handleDelete = useCallback(
-    userID => () => {
-      setUsers(prev => prev.filter(user => user.id !== userID));
-    },
-    [],
-  );
+  const handleCityChange = useCallback(e => {
+    const { value } = e.target;
+    setSelectedCity(value);
+  }, []);
 
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+  const addCity = useCallback(() => {
+    if (newCity.trim() === "") return;
+    const newId = cityList.length
+      ? Math.max(...cityList.map(city => city.id)) + 1
+      : 1;
+    setCityList(prevList => [...prevList, { id: newId, city: newCity }]);
+    setNewCity("");
+  }, [newCity, cityList]);
+
+  const options = useMemo(
+    () =>
+      cityList.map(city => (
+        <option key={city.id} value={city.city}>
+          {city.city}
+        </option>
+      )),
+    [cityList],
+  );
 
   return (
     <>
       <h1>Testing Page</h1>
-      {users.map(user => (
-        <div key={user.id}>
-          <h1>{user.name}</h1>
-          <button onClick={handleDelete(user.id)}>Delte User</button>
-        </div>
-      ))}
+      <input
+        type="text"
+        placeholder="Add City"
+        onChange={handleCity}
+        value={newCity}
+      />
+      <button onClick={addCity}>Add City</button>
+      <label htmlFor="city-select">Select City: </label>
+      <select id="city-select" value={selectedCity} onChange={handleCityChange}>
+        <option value="">-- Select a City --</option>
+        {options}
+      </select>
+      {selectedCity && <p>Selected City: {selectedCity}</p>}
     </>
   );
 };
