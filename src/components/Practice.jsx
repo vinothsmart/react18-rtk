@@ -44,9 +44,19 @@ const Practice = () => {
       </div>
       <button onClick={addRowAndColumns}>Add Rows ad Columns</button>
       <table>
-        {values.rows}
-        <tr>ROW</tr>
-        <td>Columns</td>
+        {/* {values.rows} */}
+        {/* dynamic row and colums based on values values.row and values.cloumns */}
+        {[...Array(Number(values.rows))].map((_, rowIndex) => (
+          <tr key={rowIndex}>
+            {[...Array(Number(values.cloumns))].map((_, colIndex) => (
+              <td
+                key={colIndex}
+                style={{ border: "1px solid black", padding: "5px" }}>
+                Row {rowIndex + 1} - Col {colIndex + 1}
+              </td>
+            ))}
+          </tr>
+        ))}
       </table>
     </>
   );
